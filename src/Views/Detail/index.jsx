@@ -1,10 +1,16 @@
 import React from 'react';
 
 const Detail = (props) => {
-    console.log('details props', props.location.detailProps)
+    const { detailProps } = props.location; 
   return (
     <>
-      hola details
+      <div>
+          <p>{detailProps.optionName}</p>
+          <p>{detailProps.age}</p>
+          <p>{detailProps.experience}</p>
+          <p>{detailProps.position}</p>
+          <p>{detailProps.id}</p>
+      </div>
     </>
   );
 }

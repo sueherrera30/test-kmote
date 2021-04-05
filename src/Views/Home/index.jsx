@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const [response, setResponse] = useState(null); 
+  const [response, seResponse] = useState(null); 
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const url = 'https://kmote.mx/devtest/';
-
+ 
   useEffect(() => {
     const fetchData = async () => {
         setIsLoading(true);
@@ -15,25 +16,45 @@ const Home = () => {
             const res = await fetch(url);
             const json = await res.json();
             setIsLoading(false);
-            if(isLoading) {
-              <p>please wait, i'm loading your data :D </p>
-            }
-            setResponse(json);
+            seResponse(json);
         } catch {
             setError(error);
-            if(error) {
-              <p>Ohh no!, 3312,3312: We have a problem houston</p>
-            }
         }
     };
     fetchData();
 }, []);
 
-console.log(response)
+if(error) {
+  <p>Ohh no!, 3312,3312: We have a problem houston</p>
+}
+console.log('data', response);
 
   return (
     <>
-    holi home :D
+      <h1>Hello there! Please choose one or our available earthlings</h1>
+      <div>
+        {
+          !response || isLoading  ?
+          <p>Hey, wait a minute I`m loading :D </p>
+          : response.data.map(option => (
+            <Link
+            key={option._id}
+            to={{
+              pathname: `/detail/${option.nombre}`,
+              detailProps: {
+                optionName: option.nombre,
+                age: option.edad,
+                experience: option.experiencia,
+                position: option.puesto,
+                id: option._id,
+              }
+            }}
+            >
+              {option.nombre}
+            </Link>
+          ))
+        }
+      </div>
     </>
   );
 }

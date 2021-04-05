@@ -2,12 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import './styles/home.css';
+
 const Home = () => {
   const [response, seResponse] = useState(null); 
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const url = 'https://kmote.mx/devtest/';
+  const botImg = '../../../assets/bot.png';
  
   useEffect(() => {
     const fetchData = async () => {
@@ -27,35 +30,48 @@ const Home = () => {
 if(error) {
   <p>Ohh no!, 3312,3312: We have a problem houston</p>
 }
-console.log('data', response);
 
   return (
-    <>
-      <h1>Hello there! Please choose one or our available earthlings</h1>
-      <div>
+    <div className="main-container">
+      <div className="title-container">
+        <div className="img-container">
+          <img className="img-bot" src={botImg} alt="bot" />
+        </div>
+        <div className="text">
+          <h1 className="title">Hello there!</h1>
+          <h3 className="subtitle">Please choose one or our available earthlings</h3>
+        </div>
+      </div>
         {
           !response || isLoading  ?
           <p>Hey, wait a minute I`m loading :D </p>
-          : response.data.map(option => (
-            <Link
-            key={option._id}
-            to={{
-              pathname: `/detail/${option.nombre}`,
-              detailProps: {
-                optionName: option.nombre,
-                age: option.edad,
-                experience: option.experiencia,
-                position: option.puesto,
-                id: option._id,
-              }
-            }}
-            >
-              {option.nombre}
-            </Link>
-          ))
+          : <div className="options-container">
+            {
+              response.data.map(option => (
+                <div className="option-container">
+                  <Link
+                  className="option"
+                  key={option._id}
+                  to={{
+                    pathname: `/detail/${option._id}`,
+                    detailProps: {
+                      optionName: option.nombre,
+                      age: option.edad,
+                      experience: option.experiencia,
+                      position: option.puesto,
+                      id: option._id,
+                    }
+                  }}
+                  >
+                    {option.nombre}
+                  <div className="option-decoration" />
+                  </Link>
+                </div>
+              ))
+            }
+          </div>
         }
-      </div>
-    </>
+    </div>
   );
 }
 

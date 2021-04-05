@@ -24,9 +24,9 @@ body {
     margin-left: 15px;
 }
 .title {
+    font-size: 75px;
     font-family: 'Reenie Beanie', cursive;
     color: #df6250;
-    font-size: 50px;
 }
 .subtitle {
     font-family: 'Reenie Beanie', cursive;

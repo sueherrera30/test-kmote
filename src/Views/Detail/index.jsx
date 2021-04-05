@@ -9,7 +9,7 @@ const Detail = (props) => {
 return (
         <>
         <div className="title-container_detail">
-            <h3 className="title">Hi earthling! this is {detailProps.optionName} talking... </h3>
+            <h3 className="title-detail">Hi earthling! this is {detailProps.optionName} talking... </h3>
             <div className="img-container">
                 <img className="img-bot_detail" src={botImg} alt="bot" />
             </div>

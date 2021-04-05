@@ -4,7 +4,10 @@
     justify-content: space-between;
     width: 60%;
 }
-.title { 
+.title-detail { 
+    font-size: 75px;
+    font-family: 'Reenie Beanie', cursive;
+    color: #df6250;
     font-size: 35px;
 }
 .subtitle {
